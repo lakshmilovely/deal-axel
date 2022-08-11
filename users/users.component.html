@@ -1,0 +1,258 @@
+<app-header></app-header>
+<div class="container-fluid mt-4">
+  <div class="col-lg-12 mx-auto px-4">
+    <div class="d-flex justify-content-between align-items-baseline">
+      <div class="sub_head"><span>//</span>Users</div>
+      <button class="btn ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal"(click)="adduser()" >Add</button>
+    </div>
+    <div class="grid_bg">
+      <div class="dash">
+        <table class="table table-borderless align-middle">
+          <thead>
+            <tr>
+              <th>UserId</th>
+              <th>UserName</th>
+              <th>DisplayName</th>
+              <th>Core-ID</th>
+              <th>Title</th>
+              <th>User-Role ID</th>
+              <th>User-Email</th>
+              <th>User-Active</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let u of view">
+              <td>{{u.uId}}</td>
+              <td>{{u.username}}</td>
+              <td>{{u.displayname}}</td>
+              <td>{{u.cora_Id}}</td>
+              <td>{{u.title}}</td>
+              <td>{{u.urId}}</td>
+              <td>{{u.uEmail}}</td>
+              <td>{{u.uActive}}</td>
+              <td><img src="assets/images/Edit.png" class="img-fluid" alt=""  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(u)"
+                      id="img">
+              </td>
+              <td><img src="assets/images/Delete.png" class="img-fluid" alt=""
+                      id="img" ></td>
+
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- addform -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header add_sett">
+        <div class="header d-flex align-items-center">
+          <h5 class="m-0 ms-2">
+              <img src="" alt=""> <span class="slash">//</span>Settings
+          </h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="margin-left:230px ;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      </div>
+      <div class="modal-body">
+        <div class="add_sett">
+            <div class="cont d-flex flex-column align-items-center justify-content-center">
+                <div class="container-fluid">
+                  <form [formGroup]="userForm">
+                    <div class="row mb-3 ">
+                      <div class="col-6">
+                          <div class=" form-group set">
+                              <label>UserName</label>
+                              <input type="name" class="form-control" placeholder="Username" formControlName="UserName">
+                          </div>
+                      </div>
+                      <div class="col-6">
+                        <div class=" form-group set">
+                            <label>Password</label>
+                            <input type="password" class="form-control" placeholder="Username" formControlName="Password">
+                        </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row mb-3 ">
+
+                      <div class="col-5">
+                          <div class=" form-group set">
+                              <label>DisplayName</label>
+                              <input type="name" class="form-control" placeholder="displayname" formControlName="DName">
+                          </div>
+                      </div>
+                      <div class="col-3">
+                          <div class=" form-group set">
+                              <label>CoreId:</label>
+                              <input type="name" class="form-control" placeholder="coreid" formControlName="CoreId">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row mb-3">
+                      <div class="col-4">
+                          <div class=" form-group set">
+                              <label for="">TItle:</label>
+                              <input type="name" class="form-control" placeholder="title" formControlName="Title">
+                          </div>
+                      </div>
+                      <div class="col-4">
+                        <div class=" form-group set">
+                          <label for="">RoleID:</label>
+                          <select class="form-select" aria-label="" formControlName="RoleId">
+
+                              <option value="1">1</option>
+                             <option value="2">2</option>
+                             <option value="3">3</option>
+                           </select>
+                      </div>
+                      </div>
+                      <div class="col-4">
+                          <div class=" form-group set">
+                              <label for="">Active:</label>
+                              <select class="form-select" aria-label="" formControlName="Status">
+
+                                  <option>Y</option>
+                                  <option >N</option>
+
+                               </select>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row mb-3">
+                      <div class="col-12 ">
+                          <label for="" class="form-label">Email</label>
+                          <input type="name" class="form-control" placeholder="email" formControlName="Email">
+                        </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12 d-flex justify-content-center">
+                          <div *ngIf="add12" class="btn sub_btn me-2" type="button" (click)="user()" >Submit</div>
+                          <div *ngIf="save" class="btn sub_btn me-2" type="button" (click)="saveuser(datausers.uId)" >Submit</div>
+                          <div class="btn can_btn ms-2" type="button" data-bs-dismiss="modal" aria-label="Close">Cancel</div>
+                      </div>
+                  </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+<!-- addform -->
+<!-- editform -->
+<!-- <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header add_sett">
+        <div class="header d-flex align-items-center">
+          <h5 class="m-0 ms-2">
+              <img src="" alt=""> <span class="slash">//</span>Settings
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left:230px ;" >
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      </div>
+      <div class="modal-body">
+        <div class="add_sett">
+            <div class="cont d-flex flex-column align-items-center justify-content-center">
+                <div class="container-fluid">
+                  <form [formGroup]="userForm">
+                    <div class="row mb-3 ">
+                        <div class="col-6">
+                            <div class=" form-group set">
+                                <label>UserName</label>
+                                <input type="name" class="form-control" placeholder="Username" formControlName="UserName">
+                            </div>
+                        </div>
+                        <div class="col-0">
+                          <div class=" form-group set">
+                              <label>Password</label>
+                              <input type="password" class="form-control" placeholder="Username" formControlName="Password">
+                          </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row mb-3 ">
+
+                        <div class="col-5">
+                            <div class=" form-group set">
+                                <label>DisplayName</label>
+                                <input type="name" class="form-control" placeholder="displayname" formControlName="DName">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class=" form-group set">
+                                <label>CoreId:</label>
+                                <input type="name" class="form-control" placeholder="coreid" formControlName="CoreId">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-4">
+                            <div class=" form-group set">
+                                <label for="">TItle:</label>
+                                <input type="name" class="form-control" placeholder="title" formControlName="Title">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                          <div class=" form-group set">
+                            <label for="">RoleID:</label>
+                            <select class="form-select" aria-label="" formControlName="RoleId">
+
+                                <option value="1">1</option>
+                               <option value="2">2</option>
+                               <option value="3">3</option>
+                             </select>
+                        </div>
+                        </div>
+                        <div class="col-4">
+                            <div class=" form-group set">
+                                <label for="">Active:</label>
+                                <select class="form-select" aria-label="" formControlName="Status">
+
+                                    <option>Y</option>
+                                    <option >N</option>
+
+                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 ">
+                            <label for="" class="form-label">Email</label>
+                            <input type="name" class="form-control" placeholder="email" formControlName="Email">
+                          </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <div class="btn sub_btn me-2" type="button" (click)="saveuser(datausers.uId)" >Submit</div>
+                            <div class="btn can_btn ms-2" type="button" (click)="close()">Cancel</div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
